@@ -36,11 +36,11 @@ lr=0.1
 #Step3: network define
 X = tf.placeholder(tf.float32, shape=[NODE_SIZE, NODE_FEATURE_DIM])
 Y = tf.placeholder(tf.int32, shape=[NODE_SIZE])
-label = tf.one_hot(Y, num_classes)
-Y_enc = tf.one_hot(Y, 2)
+#label = tf.one_hot(Y, num_classes)
+Y_enc = tf.one_hot(Y, 2)   #就是Label
 adj = tf.placeholder(tf.float32, shape=[NODE_SIZE, NODE_SIZE])
 weights = {"hidden1": tf.Variable(tf.random_normal(dtype=tf.float32, shape=[NODE_FEATURE_DIM, HIDDEN_DIM1]), name='w1'),
-           "hidden2": tf.Variable(tf.random_normal(dtype=tf.float32, shape=[HIDDEN_DIM1, num_classes]), 'w1')}
+           "hidden2": tf.Variable(tf.random_normal(dtype=tf.float32, shape=[HIDDEN_DIM1, num_classes]), 'w2')}
 
 D_hat = tf.matrix_inverse(tf.matrix_diag(tf.reduce_sum(adj, axis=0)))
 l1 = tf.matmul(tf.matmul(tf.matmul(D_hat, adj), X), weights['hidden1'])
